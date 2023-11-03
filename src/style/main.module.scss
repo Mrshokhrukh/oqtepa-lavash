@@ -28,6 +28,11 @@ ul {
     margin: auto;
 }
 
+.main {
+    margin-top: 18vh;
+}
+
+
 @media(max-width:1980px) {
     .container {
         max-width: 1600px;
@@ -58,8 +63,13 @@ ul {
     }
 }
 
+
 @media(max-width:768px) {
     .container {
         max-width: 100%;
+    }
+
+    .main {
+        margin-top: 12vh;
     }
 }

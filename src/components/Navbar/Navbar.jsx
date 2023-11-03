@@ -1,10 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import nav from "./nav.module.scss";
 import logoImg from "../../assets/logo_2.0.svg";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdLanguage } from "react-icons/md";
 import { AiOutlineDown } from "react-icons/ai";
 import { CiSearch } from "react-icons/ci";
+import { useState } from "react";
+
 
 const {
   navbar,
@@ -29,10 +31,27 @@ const {
 } = nav;
 
 const Navbar = () => {
+  const [isOpenLang, setIsOpenLang] = useState(false);
+  const [isOpenReg, setIsOpenReg] = useState(false);
+  let navigate = useNavigate();
+
+  const selectReg = () => {
+    console.log("open");
+    setIsOpenReg(!isOpenReg);
+  };
+
+  const selectLang = () => {
+    setIsOpenLang(!isOpenLang);
+  };
+
   return (
-    <nav className={navbar}>
+    <nav className={`${navbar} ${nav.container}`}>
       <div className={logo}>
-        <img src="https://oqtepalavash.uz/assets/images/logo_2.0.svg" alt="" />
+        <img
+          src="https://oqtepalavash.uz/assets/images/logo_2.0.svg"
+          alt=""
+          onClick={() => navigate("/")}
+        />
       </div>
       <div className={elements}>
         <div className={nav.center}>
@@ -55,9 +74,8 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div className={regions}>
+            <div className={regions} onClick={selectReg}>
               <div className={nav.regions_icon}>
-                {/* <MdLanguage /> */}
                 <img
                   src="https://oqtepalavash.uz/assets/images/regionIcon.svg"
                   alt=""
@@ -66,6 +84,25 @@ const Navbar = () => {
               <div className={nav.region_links}>
                 <span className={regions_title}>regions</span>
                 <span className={regions_location}>Tashkent</span>
+              </div>
+
+              <div
+                className={
+                  isOpenReg
+                    ? `${nav.openRegionSelector_box} ${nav.open}`
+                    : `${nav.openRegionSelector_box}`
+                }
+              >
+                <div className={nav.select_region}>
+                  <option value="" className={nav.selectedOpt}>
+                    Tashkent
+                  </option>
+                  <option value="">Nukus</option>
+                  <option value="">Namangan</option>
+                  <option value="">Qo'qon</option>
+                  <option value="">Samarqand</option>
+                  <option value="">Andijon</option>
+                </div>
               </div>
             </div>
           </div>
@@ -81,11 +118,27 @@ const Navbar = () => {
 
         <div className={nav.right}>
           <div className={nav.right_top}>
-            <div className={language}>
+            <div className={language} onClick={selectLang}>
               <span className={lang_icon}></span>
               <div className={lang_title}>UZ</div>
               <div className={nav.select_icon}>
                 <ion-icon name="chevron-down-outline"></ion-icon>
+              </div>
+
+              <div
+                className={
+                  isOpenLang
+                    ? `${nav.openLangSelector_box} ${nav.open}`
+                    : `${nav.openLangSelector_box}`
+                }
+              >
+                <div className={nav.select_language}>
+                  <option value="" className={nav.selectedOpt}>
+                    O'zbekcha
+                  </option>
+                  <option value="">English</option>
+                  <option value="">Русский</option>
+                </div>
               </div>
             </div>
 
@@ -97,6 +150,9 @@ const Navbar = () => {
             <button>Start order</button>
           </div>
         </div>
+      </div>
+      <div className="nav_elements_show_in_responsive">
+        <div className="catalog_items"></div>
       </div>
     </nav>
   );

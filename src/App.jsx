@@ -11,11 +11,13 @@ const App = () => {
         <div className="header">
           <Layout />
         </div>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="contact" element={<Contact />} />
-        </Routes>
+        <div className={app.main}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );
