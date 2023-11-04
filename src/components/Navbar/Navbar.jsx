@@ -7,6 +7,9 @@ import { AiOutlineDown } from "react-icons/ai";
 import { CiSearch } from "react-icons/ci";
 import { useState } from "react";
 
+import uzb from "../../assets/Flag_of_Uzbekistan.svg.png";
+import rus from "../../assets/Flag_of_Russia.svg.png";
+import eng from "../../assets/Flag_of_Great_Britain_(English_version).png";
 
 const {
   navbar,
@@ -35,13 +38,14 @@ const Navbar = () => {
   const [isOpenReg, setIsOpenReg] = useState(false);
   let navigate = useNavigate();
 
-  const selectReg = () => {
-    console.log("open");
-    setIsOpenReg(!isOpenReg);
-  };
-
-  const selectLang = () => {
-    setIsOpenLang(!isOpenLang);
+  const openSelector = (val) => {
+    if (val == "lang") {
+      setIsOpenLang(!isOpenLang);
+      setIsOpenReg(false);
+    } else {
+      setIsOpenReg(!isOpenReg);
+      setIsOpenLang(false);
+    }
   };
 
   return (
@@ -74,7 +78,7 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div className={regions} onClick={selectReg}>
+            <div className={regions} onClick={() => openSelector("reg")}>
               <div className={nav.regions_icon}>
                 <img
                   src="https://oqtepalavash.uz/assets/images/regionIcon.svg"
@@ -93,16 +97,14 @@ const Navbar = () => {
                     : `${nav.openRegionSelector_box}`
                 }
               >
-                <div className={nav.select_region}>
-                  <option value="" className={nav.selectedOpt}>
-                    Tashkent
-                  </option>
-                  <option value="">Nukus</option>
-                  <option value="">Namangan</option>
-                  <option value="">Qo'qon</option>
-                  <option value="">Samarqand</option>
-                  <option value="">Andijon</option>
-                </div>
+                <ul className={nav.select_region}>
+                  <li className={nav.selectedOpt}>Tashkent</li>
+                  <li>Nukus</li>
+                  <li>Namangan</li>
+                  <li>Qo'qon</li>
+                  <li>Samarqand</li>
+                  <li>Andijon</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -118,7 +120,7 @@ const Navbar = () => {
 
         <div className={nav.right}>
           <div className={nav.right_top}>
-            <div className={language} onClick={selectLang}>
+            <div className={language} onClick={() => openSelector("lang")}>
               <span className={lang_icon}></span>
               <div className={lang_title}>UZ</div>
               <div className={nav.select_icon}>
@@ -132,13 +134,17 @@ const Navbar = () => {
                     : `${nav.openLangSelector_box}`
                 }
               >
-                <div className={nav.select_language}>
-                  <option value="" className={nav.selectedOpt}>
-                    O'zbekcha
-                  </option>
-                  <option value="">English</option>
-                  <option value="">Русский</option>
-                </div>
+                <ul className={nav.select_language}>
+                  <li className={nav.selectedOpt}>
+                    <img src={uzb} alt="" /> O'zbekcha
+                  </li>
+                  <li>
+                    <img src={eng} alt="" /> English
+                  </li>
+                  <li>
+                    <img src={rus} alt="" /> Русский
+                  </li>
+                </ul>
               </div>
             </div>
 
