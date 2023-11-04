@@ -46,6 +46,7 @@
 }
 
 
+
 .bottom_search {
     form {
         display: flex;
@@ -116,6 +117,7 @@
     .region_links {
         display: flex;
         flex-direction: column;
+        text-transform: capitalize;
     }
 
     .region_links span:nth-child(2) {
@@ -125,7 +127,7 @@
 
 .right {
 
-    padding: 30px 0;
+    padding: 20px 0;
 
     .right_top {
         padding-bottom: 30px;
@@ -165,6 +167,15 @@
     padding-top: 8px;
 }
 
+.lang_icon {
+    img {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+}
 
 .login button {
     padding: 10px 15px;
@@ -289,8 +300,13 @@
 }
 
 
-// ------------------------------------------
+// ----------------------MEDIA QUERIES--------------------
 
+@media(max-width:1200px) {
+    .top_links {
+        font-size: 14px;
+    }
+}
 
 @media(max-width:1100px) {
 
@@ -323,6 +339,17 @@
     }
 }
 
+@media(max-width:992px) {
+    .logo {
+        display: flex;
+        align-items: center;
+
+        img {
+            width: 130px;
+        }
+    }
+}
+
 @media(max-width:768px) {
     .elements {
         display: none;
@@ -344,7 +371,7 @@
 }
 
 
-// ------------------
+// -----------CONTAINER-------
 
 .container {
     max-width: 70%;
@@ -385,4 +412,15 @@
     .container {
         max-width: 100%;
     }
+}
+
+.nav_elements_show_in_responsive {
+    display: none;
+}
+
+@media(max-width:768px) {
+    .nav_elements_show_in_responsive {
+        display: block;
+    }
+
 }
