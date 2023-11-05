@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import sid from "./sidebar.module.scss";
 import { FaUserAlt } from "react-icons/fa";
 import { MdOutlineMenuBook } from "react-icons/md";
@@ -9,16 +9,20 @@ import { HiLocationMarker } from "react-icons/hi";
 import { AiFillCompass } from "react-icons/ai";
 import { RiTeamFill } from "react-icons/ri";
 import { IoCall } from "react-icons/io5";
+
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { closeSidebar } from "../../redux/sidebarSlice";
+import Selections from "./Selections";
 
 const Sidebar = () => {
   let isOpen = useSelector((state) => state.sidebar.isOpen);
   let dispatch = useDispatch();
+
   return (
     <div className={isOpen ? `${sid.sidebar} ${sid.open}` : `${sid.sidebar}`}>
       <div className={sid.sidebar_elements}>
+        <Selections />
         <div className={sid.element}>
           <span className={sid.icon}>
             <FaUserAlt />
@@ -53,6 +57,18 @@ const Sidebar = () => {
             className={sid.text}
           >
             cart
+          </Link>
+        </div>
+        <div className={sid.element}>
+          <span className={sid.icon}>
+            <MdOutlineFavorite />
+          </span>
+          <Link
+            to="/"
+            onClick={() => dispatch(closeSidebar())}
+            className={sid.text}
+          >
+            favorites
           </Link>
         </div>
         <div className={sid.element}>

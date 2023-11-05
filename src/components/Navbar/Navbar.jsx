@@ -5,11 +5,7 @@ import { HiLocationMarker } from "react-icons/hi";
 import { CgMenu } from "react-icons/cg";
 import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
-import uzb from "../../assets/Flag_of_Uzbekistan.svg.png";
-import rus from "../../assets/Flag_of_Russia.svg.png";
-import eng from "../../assets/Flag_of_Great_Britain_(English_version).png";
 import { langs } from "../dropdowns/LangDropDown";
-import Nav_catalogs from "../nav_catalogs/Nav_catalogs";
 import { useDispatch, useSelector } from "react-redux";
 import { closeSidebar, openSidebar } from "../../redux/sidebarSlice";
 
@@ -38,13 +34,7 @@ const {
 const Navbar = () => {
   const [isOpenLang, setIsOpenLang] = useState(false);
   const [isOpenReg, setIsOpenReg] = useState(false);
-  const [selectedLang, setLang] = useState({
-    lang: "English",
-    short: "EN",
-    url: eng,
-    isSelected: false,
-    id: 1,
-  });
+  const [selectedLang, setLang] = useState(langs[0]);
   const [selectedReg, setReg] = useState("tashkent");
 
   let navigate = useNavigate();
@@ -154,10 +144,8 @@ const Navbar = () => {
                   <img src={selectedLang.url} alt="" />
                 </span>
                 <div className={lang_title}>{selectedLang.short}</div>
-                <div className={nav.select_icon}>
-                  <ion-icon name="chevron-down-outline"></ion-icon>
-                </div>
-
+                <ion-icon name="chevron-down-outline"></ion-icon>{" "}
+                <div className={nav.select_icon}></div>
                 <div
                   className={
                     isOpenLang
