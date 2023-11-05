@@ -10,7 +10,7 @@ const Nav_catalogs = () => {
     myRef.current.children[0].className = `${cat.cat_items} ${cat.active}`;
   }, []);
   function hey({ event, item }) {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < catalogs.length; i++) {
       myRef.current.children[i].className = `${cat.cat_items}`;
     }
     event.target.className = `${cat.cat_items} ${cat.active}`;
