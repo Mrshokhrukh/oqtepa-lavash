@@ -1,0 +1,10 @@
+.page_container {
+    position: relative;
+    top: 170px;
+}
+
+@media(max-width:768px) {
+    .page_container {
+        top: 55px;
+    }
+}

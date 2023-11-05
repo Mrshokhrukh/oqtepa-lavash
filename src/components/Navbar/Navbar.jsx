@@ -2,16 +2,16 @@ import { NavLink, useNavigate } from "react-router-dom";
 import nav from "./nav.module.scss";
 import logoImg from "../../assets/logo_2.0.svg";
 import { HiLocationMarker } from "react-icons/hi";
-import { MdLanguage } from "react-icons/md";
-import { AiOutlineDown } from "react-icons/ai";
-import { CiSearch } from "react-icons/ci";
+import { CgMenu } from "react-icons/cg";
 import { useEffect, useState } from "react";
-
+import { IoClose } from "react-icons/io5";
 import uzb from "../../assets/Flag_of_Uzbekistan.svg.png";
 import rus from "../../assets/Flag_of_Russia.svg.png";
 import eng from "../../assets/Flag_of_Great_Britain_(English_version).png";
 import { langs } from "../dropdowns/LangDropDown";
 import Nav_catalogs from "../nav_catalogs/Nav_catalogs";
+import { useDispatch, useSelector } from "react-redux";
+import { closeSidebar, openSidebar } from "../../redux/sidebarSlice";
 
 const {
   navbar,
@@ -48,6 +48,7 @@ const Navbar = () => {
   const [selectedReg, setReg] = useState("tashkent");
 
   let navigate = useNavigate();
+  let dispatch = useDispatch();
 
   const openSelector = (val) => {
     if (val == "lang") {
@@ -71,9 +72,10 @@ const Navbar = () => {
       }
     });
   };
+  let isOpenSidebar = useSelector((state) => state.sidebar.isOpen);
 
   return (
-    <>
+    <div>
       <nav className={`${navbar} ${nav.container}`}>
         <div className={logo}>
           <img
@@ -88,11 +90,11 @@ const Navbar = () => {
             <div className={top_links}>
               <NavLink to="/">Menu</NavLink>
 
-              <NavLink to="/">About us</NavLink>
+              <NavLink to="/about">About us</NavLink>
 
-              <NavLink to="/">Branches</NavLink>
+              <NavLink to="/branches">Branches</NavLink>
 
-              <NavLink to="/">Contacts</NavLink>
+              <NavLink to="/contact">Contacts</NavLink>
 
               <div className={delivery}>
                 <div className={nav.delivery_icon}>
@@ -191,12 +193,31 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </nav>
 
-      <div className={nav.nav_elements_show_in_responsive}>
-        <Nav_catalogs />
-      </div>
-    </>
+        <div className={nav.responsive_right_nav}>
+          {isOpenSidebar ? (
+            <div
+              className={nav.close_icon}
+              onClick={() => dispatch(closeSidebar())}
+            >
+              <IoClose />
+            </div>
+          ) : (
+            <>
+              <div className={nav.delivery_icon}>
+                <HiLocationMarker />
+              </div>
+              <div
+                className={nav.burger_icon}
+                onClick={() => dispatch(openSidebar())}
+              >
+                <CgMenu />
+              </div>
+            </>
+          )}
+        </div>
+      </nav>
+    </div>
   );
 };
 

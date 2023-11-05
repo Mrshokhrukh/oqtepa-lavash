@@ -1,0 +1,40 @@
+.sidebar {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    z-index: 100;
+    margin-top: 55px;
+    display: none;
+}
+
+.sidebar_elements {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    gap: 20px;
+}
+
+.element {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 0 15px;
+    cursor: pointer;
+
+    .icon {
+        font-size: 25px;
+        color: var(--main);
+        height: 27px;
+    }
+
+    .text {
+        color: var(--main);
+        font-weight: 600;
+        text-transform: capitalize;
+    }
+}
+
+.sidebar.open {
+    display: flex;
+}

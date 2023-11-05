@@ -13,3 +13,9 @@ export const catalogs = [
   "sauces",
   "sets",
 ];
+
+export const sidebar_elements=[
+  {
+    
+  }
+]

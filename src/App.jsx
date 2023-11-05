@@ -4,20 +4,20 @@ import Layout from "./routes/Layout";
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
+import Branches from "./pages/branches/Branches";
 const App = () => {
   return (
     <div className={app.container}>
       <BrowserRouter>
-        <div className="header">
+        <div>
           <Layout />
         </div>
-        <div className={app.main}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="contact" element={<Contact />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="branches" element={<Branches />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );

@@ -1,6 +1,7 @@
 .catalog_items_box {
     width: 100%;
     position: fixed;
+    z-index: 20;
     top: 5.5%;
     height: auto;
     border-bottom: 1px solid var(--main);
@@ -26,6 +27,7 @@
     font-weight: 600;
     font-size: 14px;
     white-space: nowrap;
+    text-transform: capitalize;
 }
 
 .cat_items.active {

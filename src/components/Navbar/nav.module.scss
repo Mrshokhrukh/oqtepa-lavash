@@ -42,9 +42,7 @@
     font-size: 16px;
     font-weight: bold;
     align-items: center;
-
 }
-
 
 
 .bottom_search {
@@ -93,7 +91,7 @@
 
 .delivery_icon,
 .regions_icon {
-    font-size: 24px;
+    font-size: 26px;
     width: 35px;
     height: 35px;
     display: flex;
@@ -130,7 +128,7 @@
     padding: 20px 0;
 
     .right_top {
-        padding-bottom: 30px;
+        padding-bottom: 37px;
         display: flex;
         gap: 10px;
     }
@@ -202,6 +200,51 @@
     }
 }
 
+// -------------------------------------------------
+// show in responsive elements
+
+.responsive_right_nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .delivery_icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .burger_icon {
+        font-size: 24px;
+        color: var(--main);
+        cursor: pointer;
+        width: 35px;
+        height: 35px;
+        display: grid;
+        align-content: center;
+        justify-content: center;
+    }
+
+    .close_icon {
+        width: 25px;
+        height: 25px;
+        border: 2px solid var(--main);
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--main);
+        font-weight: bold;
+        border-radius: 7px;
+        margin-right: 10px;
+
+    }
+
+    display: none;
+}
+
+
+// -------------------------------------------------
 
 // -----------------------------------
 // SELECTORS
@@ -302,9 +345,13 @@
 
 // ----------------------MEDIA QUERIES--------------------
 
-@media(max-width:1200px) {
+@media(max-width:1300px) {
     .top_links {
         font-size: 14px;
+    }
+
+    .right .right_top {
+        padding-bottom: 28px;
     }
 }
 
@@ -412,15 +459,20 @@
     .container {
         max-width: 100%;
     }
-}
 
-.nav_elements_show_in_responsive {
-    display: none;
-}
 
-@media(max-width:768px) {
-    .nav_elements_show_in_responsive {
-        display: block;
+
+    .navbar {
+        justify-content: space-between;
+        align-items: center;
+
+        .logo {
+            width: auto;
+            display: inline-block;
+        }
     }
 
+    .responsive_right_nav {
+        display: flex;
+    }
 }

@@ -1,0 +1,18 @@
+.nav_elements_show_in_responsive {
+    display: none;
+}
+
+.page_container {
+    position: relative;
+    top: 170px;
+}
+
+@media (max-width:768px) {
+    .nav_elements_show_in_responsive {
+        display: block;
+    }
+
+    .page_container {
+        top: 95px;
+    }
+}
