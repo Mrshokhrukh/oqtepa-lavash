@@ -1,6 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import nav from "./nav.module.scss";
-import logoImg from "../../assets/logo_2.0.svg";
 import { HiLocationMarker } from "react-icons/hi";
 import { CgMenu } from "react-icons/cg";
 import { useEffect, useState } from "react";
