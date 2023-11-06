@@ -14,8 +14,8 @@ export const langs = [
     lang: "English",
     short: "EN",
     url: eng,
-    isSelected: true,
-    id: 1,
+    isSelected: false,
+    id: 0,
   },
   {
     lang: "Русский",
@@ -30,11 +30,11 @@ export const regions = [
   {
     name: "tashkent",
     isSelected: false,
-    id: 1,
+    id: 0,
   },
   {
     name: "nukus",
-    isSelected: true,
+    isSelected: false,
     id: 0,
   },
   {

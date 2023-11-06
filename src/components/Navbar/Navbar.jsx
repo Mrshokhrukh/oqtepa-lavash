@@ -33,8 +33,25 @@ const {
 const Navbar = () => {
   const [isOpenLang, setIsOpenLang] = useState(false);
   const [isOpenReg, setIsOpenReg] = useState(false);
-  const [selectedLang, setLang] = useState(langs[0]);
   const [selectedReg, setReg] = useState("tashkent");
+  const [selectedLang, setLang] = useState(
+    JSON.parse(localStorage.getItem("lang")) || langs[0]
+  );
+
+  useEffect(() => {
+    const getLang = () => {
+      langs.find((lang) => {
+        if (lang.short === selectedLang.short) {
+          lang.isSelected = true;
+          lang.id = 1;
+        } else {
+          lang.id = 0;
+          lang.isSelected = false;
+        }
+      });
+    };
+    getLang();
+  }, []);
 
   let navigate = useNavigate();
   let dispatch = useDispatch();
@@ -54,7 +71,8 @@ const Navbar = () => {
       if (lang.short === param) {
         lang.isSelected = true;
         lang.id = 1;
-        setLang(lang);
+        localStorage.setItem("lang", JSON.stringify(lang));
+        setLang(JSON.parse(localStorage.getItem("lang")));
       } else {
         lang.id = 0;
         lang.isSelected = false;

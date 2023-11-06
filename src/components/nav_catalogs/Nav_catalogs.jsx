@@ -9,7 +9,7 @@ const Nav_catalogs = () => {
   useEffect(() => {
     myRef.current.children[0].className = `${cat.cat_items} ${cat.active}`;
   }, []);
-  function hey({ event, item }) {
+  function hey(event, item) {
     for (let i = 0; i < catalogs.length; i++) {
       myRef.current.children[i].className = `${cat.cat_items}`;
     }
@@ -24,9 +24,9 @@ const Nav_catalogs = () => {
           <div
             key={i}
             className={cat.cat_items}
-            onClick={() => hey({ event, item })}
+            onClick={() => hey(event, item.name)}
           >
-            {item}
+            {item.name}
           </div>
         );
       })}
