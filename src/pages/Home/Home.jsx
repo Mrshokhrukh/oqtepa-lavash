@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Nav_catalogs from "../../components/nav_catalogs/Nav_catalogs";
 import menu from "./home.module.scss";
 import { BiCategoryAlt } from "react-icons/bi";
@@ -9,11 +9,20 @@ import Loading from "../../components/loading/Loading";
 const Home = () => {
   let dispatch = useDispatch();
   let getData = useSelector((state) => state.products);
-
+  const [products, setProducts] = useState(getData.products);
+  let myRef = useRef(null);
   useEffect(() => {
     dispatch(getProductsAsync());
     dispatch(getCategoriesAsync());
   }, []);
+
+  function changeCategory(data) {
+    myRef.current.classList.add(`${menu.active}`);
+    const newProducts = getData.products.filter(
+      (item) => item.category_id == data.id
+    );
+    setProducts(newProducts);
+  }
 
   if (getData.isLoading) {
     return <Loading />;
@@ -37,7 +46,12 @@ const Home = () => {
             <div className={menu.catalog_categories}>
               {getData.categories.map((cat, i) => {
                 return (
-                  <div className={menu.product} key={i}>
+                  <div
+                    className={menu.product}
+                    key={i}
+                    onClick={() => changeCategory(cat)}
+                    ref={myRef}
+                  >
                     <img src={cat.icon} alt="" />
                     <p className={menu.product_title}>{cat.name}</p>
                   </div>
@@ -49,7 +63,7 @@ const Home = () => {
         <div className={menu.manu_products}>
           <h1 className={menu.product_title}>Lavash</h1>
           <div className={menu.menu_products_right}>
-            {getData.products.map((product) => {
+            {products.map((product) => {
               return (
                 <div key={product.id} className={menu.card}>
                   <div className={menu.like}>
