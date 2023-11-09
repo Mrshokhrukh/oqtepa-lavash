@@ -112,7 +112,7 @@ const Sidebar = () => {
             <RiTeamFill />
           </span>
           <Link
-            to="/"
+            to="/about"
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >
@@ -124,7 +124,7 @@ const Sidebar = () => {
             <IoCall />
           </span>
           <Link
-            to="/"
+            to="/contact"
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >

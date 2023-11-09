@@ -1,0 +1,57 @@
+.page_container {
+    position: relative;
+    top: 170px;
+}
+
+@media (max-width:768px) {
+    .page_container {
+        top: 65px;
+    }
+}
+
+.page_title {
+    font-size: 30px;
+    padding: 10px 0;
+}
+
+.about {
+    img {
+        width: 100%;
+        object-fit: cover;
+        border-radius: 10px
+    }
+
+    .description {
+        padding: 10px 0;
+        font-size: 15px;
+        font-weight: 600;
+    }
+}
+.space_bottom {
+    height: 100px;
+    width: 100%;
+}
+
+@media (max-width:768px) {
+    .page_title {
+        font-size: 24px;
+        padding-left: 10px;
+    }
+
+    .about {
+        padding: 0 10px;
+
+        img {
+            height: 150px;
+        }
+
+        .description {
+            font-size: 14px
+        }
+    }
+
+    .space_bottom {
+        height: 50px;
+        width: 100%;
+    }
+}

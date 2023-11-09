@@ -2,25 +2,35 @@ import React, { useEffect, useRef, useState } from "react";
 import Nav_catalogs from "../../components/nav_catalogs/Nav_catalogs";
 import menu from "./home.module.scss";
 import { BiCategoryAlt } from "react-icons/bi";
-import { BsHeart } from "react-icons/bs";
+
 import { useDispatch, useSelector } from "react-redux";
-import { getCategoriesAsync, getProductsAsync } from "../../redux/ProductSlice";
+import {
+  getCategoriesAsync,
+  getProductsAsync,
+  getSinglePrAsync,
+} from "../../redux/ProductSlice";
 import Loading from "../../components/loading/Loading";
+import Categories from "../../components/categories/Categories";
+import Products from "../../components/products/Products";
 const Home = () => {
   let dispatch = useDispatch();
   let getData = useSelector((state) => state.products);
-  const [products, setProducts] = useState(getData.products);
-  let myRef = useRef(null);
+  const [products, setProducts] = useState(
+    JSON.parse(localStorage.getItem("product"))
+  );
+
+  const [category, setCateg] = useState("Lavashlar");
   useEffect(() => {
     dispatch(getProductsAsync());
     dispatch(getCategoriesAsync());
+    dispatch(getSinglePrAsync(1));
   }, []);
 
   function changeCategory(data) {
-    myRef.current.classList.add(`${menu.active}`);
     const newProducts = getData.products.filter(
       (item) => item.category_id == data.id
     );
+    setCateg(data.name);
     setProducts(newProducts);
   }
 
@@ -31,7 +41,7 @@ const Home = () => {
   return (
     <div className={menu.page_container}>
       <div className={menu.nav_elements_show_in_responsive}>
-        <Nav_catalogs getData={getData} />
+        <Nav_catalogs getData={getData.categories} />
       </div>
       <h1 className={menu.title}>Menu</h1>
       <div className={menu.menu}>
@@ -44,41 +54,23 @@ const Home = () => {
               <p>catalog</p>
             </div>
             <div className={menu.catalog_categories}>
-              {getData.categories.map((cat, i) => {
+              {getData.categories.map((cat) => {
                 return (
-                  <div
-                    className={menu.product}
-                    key={i}
-                    onClick={() => changeCategory(cat)}
-                    ref={myRef}
-                  >
-                    <img src={cat.icon} alt="" />
-                    <p className={menu.product_title}>{cat.name}</p>
-                  </div>
+                  <Categories
+                    key={cat.id}
+                    categories={cat}
+                    changeCategory={changeCategory}
+                  />
                 );
               })}
             </div>
           </div>
         </div>
         <div className={menu.manu_products}>
-          <h1 className={menu.product_title}>Lavash</h1>
+          <h1 className={menu.product_title}>{category}</h1>
           <div className={menu.menu_products_right}>
             {products.map((product) => {
-              return (
-                <div key={product.id} className={menu.card}>
-                  <div className={menu.like}>
-                    <span>
-                      <BsHeart />
-                    </span>
-                  </div>
-                  <img src={product.image} alt="404" />
-                  <div className={menu.card_info}>
-                    <div className={menu.name}>{product.name}</div>
-                    <div className={menu.price}>{product.price}</div>
-                    <button className={menu.button}>Add</button>
-                  </div>
-                </div>
-              );
+              return <Products key={product.id} product={product} />;
             })}
           </div>
         </div>

@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 import Branches from "./pages/branches/Branches";
+
 const App = () => {
   return (
     <div className={app.container}>
@@ -14,8 +15,8 @@ const App = () => {
         </div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="branches" element={<Branches />} />
           <Route path="about" element={<About />} />
+          <Route path="branches" element={<Branches />} />
           <Route path="contact" element={<Contact />} />
         </Routes>
       </BrowserRouter>

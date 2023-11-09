@@ -12,14 +12,25 @@ export const getProductsAsync = createAsyncThunk(
   async () => {
     let getData = await fetch(`${baseUrl}product/`);
     let resp = await getData.json();
+
     return resp;
   }
 );
+export const getSinglePrAsync = createAsyncThunk(
+  "products/getSinglePrAsync",
+  async (id) => {
+    let getData = await fetch(`${baseUrl}product/?category_id=${id}`);
+    let resp = await getData.json();
+    return resp;
+  }
+);
+
 export const getCategoriesAsync = createAsyncThunk(
   "products/getCategoriesAsync",
   async () => {
     let getData = await fetch(`${baseUrl}product/categories/`);
     let resp = await getData.json();
+
     return resp;
   }
 );
@@ -31,8 +42,11 @@ const productSlice = createSlice({
     getProducts: (state) => {
       return state;
     },
-    // getCategories: (state) => {
-    //   return state;
+
+    // getCategories: (state, action) => {
+    //   let a = action.payload.Allproducts.filter(
+    //     (item) => item.category_id === action.payload.id
+    //   );
     // },
   },
   extraReducers: {
@@ -49,8 +63,16 @@ const productSlice = createSlice({
     },
 
     // ----------------CATEGORIES-----------------
+    [getCategoriesAsync.pending]: (state) => {
+      state.isLoading = true;
+    },
     [getCategoriesAsync.fulfilled]: (state, action) => {
       state.categories = action.payload;
+    },
+
+    // ----------------GET SINGLE-------------------------------------
+    [getSinglePrAsync.fulfilled]: (state, action) => {
+      localStorage.setItem("product", JSON.stringify(action.payload));
     },
   },
 });
