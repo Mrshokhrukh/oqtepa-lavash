@@ -1,0 +1,47 @@
+.otp_verification_box {
+    padding: 60px 16px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+    padding-bottom: 120px;
+
+    .title {
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .req_again {
+        color: rgb(92, 92, 92);
+        font-size: 18px;
+        text-decoration: underline;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .otp_code_field {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .code {
+        width: 60px;
+        height: 67px;
+        cursor: text;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        border-width: 0px;
+        margin-right: 10px;
+        text-align: center;
+        font-size: 32px;
+        outline: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        outline: none;
+        border: none;
+
+    }
+}

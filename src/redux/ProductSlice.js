@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-let baseUrl = `https://oqtepalavash-api.khasanjon.me/api/`;
+import { baseUrl } from "./api";
 const initialState = {
   products: [],
   categories: [],

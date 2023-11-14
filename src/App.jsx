@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 import Branches from "./pages/branches/Branches";
+import AuthModal from "./components/authModal/AuthModal";
 
 const App = () => {
   return (

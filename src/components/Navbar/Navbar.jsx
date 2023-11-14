@@ -7,6 +7,7 @@ import { IoClose } from "react-icons/io5";
 import { langs } from "../dropdowns/LangDropDown";
 import { useDispatch, useSelector } from "react-redux";
 import { closeSidebar, openSidebar } from "../../redux/sidebarSlice";
+import { openAuthModal } from "../../redux/authSlice";
 
 const {
   navbar,
@@ -189,7 +190,7 @@ const Navbar = () => {
                 </div>
               </div>
 
-              <div className={login}>
+              <div className={login} onClick={() => dispatch(openAuthModal())}>
                 <button>Login</button>
               </div>
             </div>
