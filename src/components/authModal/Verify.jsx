@@ -5,29 +5,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeVerifyModal } from "../../redux/authSlice";
 import { AiOutlineClose } from "react-icons/ai";
 const Verify = () => {
-  let numberOfDigits = 4;
-  const [code, setCode] = useState(Array(numberOfDigits).fill(""));
+  const [code, setCode] = useState();
+  const [disable, setDisable] = useState(true);
   let isOpen = useSelector((state) => state.authModal.isOpenVerify);
   let dispatch = useDispatch();
-  const inputRefs = useRef([]);
-  const handleChange = (index, value) => {
-    let check = /^[0-9]$/;
+  const inputRefs = useRef();
 
-    if (check.test(value)) {
-      const newOtp = [...code];
-      newOtp[index] = value;
-      setCode(newOtp);
+  let submitBtn = /^[0-9]{4}$/;
+  const handleChange = (e) => {
+    const validValue = e.target.value.replace(/\D/g, "").slice(0, 4);
+    setCode(validValue);
 
-      if (value !== "" && index < numberOfDigits - 1) {
-        inputRefs.current[index + 1].focus();
-      }
+    if (submitBtn.test(validValue)) {
+      setDisable(false);
+    } else {
+      setDisable(true);
     }
   };
 
- 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+   
+  };
 
   useEffect(() => {
-    inputRefs.current[0].focus();
+    inputRefs.current.focus();
   }, []);
 
   return (
@@ -50,30 +52,28 @@ const Verify = () => {
         </div>
 
         <div className={ath.modal_body}>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className={ver.otp_verification_box}>
               <p className={ver.title}>Enter SMS verification code</p>
               <div className={ver.otp_code_field}>
-                {code.map((digit, index) => (
-                  <input
-                    key={index}
-                    type="text"
-                    maxLength="1"
-                    value={digit}
-                    className={ver.code}
-                    placeholder="•"
-                    onChange={(e) => handleChange(index, e.target.value, e)}
-                    onKeyDown={(e) => handleKeyDown(index, e)}
-                    ref={(input) => (inputRefs.current[index] = input)}
-                  />
-                ))}
+                <input
+                  type="number"
+                  maxLength={4}
+                  pattern="\d*"
+                  value={code || ""}
+                  className={ver.code}
+                  placeholder="••••"
+                  onChange={handleChange}
+                  ref={inputRefs}
+                />
+
                 {/* <div className={ver.code}></div>
                 <div className={ver.code}>•</div>
                 <div className={ver.code}>•</div> */}
               </div>
               <p className={ver.req_again}>Request code again</p>
             </div>
-            <button>login</button>
+            <button disabled={disable}>login</button>
           </form>
         </div>
       </div>

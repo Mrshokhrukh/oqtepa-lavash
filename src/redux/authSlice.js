@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
   name: "authModal",
-  initialState: { isOpenLogin: false, isOpenVerify: false },
+  initialState: { isOpenLogin: false, isOpenVerify: true },
   reducers: {
     openAuthModal: (state) => {
       state.isOpenLogin = true;
