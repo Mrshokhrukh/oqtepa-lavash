@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import nav from "./nav.module.scss";
 import { HiLocationMarker } from "react-icons/hi";
 import { CgMenu } from "react-icons/cg";
@@ -8,7 +8,7 @@ import { langs } from "../dropdowns/LangDropDown";
 import { useDispatch, useSelector } from "react-redux";
 import { closeSidebar, openSidebar } from "../../redux/sidebarSlice";
 import { openAuthModal } from "../../redux/authSlice";
-
+import { SlUserFollowing } from "react-icons/sl";
 const {
   navbar,
   logo,
@@ -35,6 +35,8 @@ const Navbar = () => {
   const [isOpenLang, setIsOpenLang] = useState(false);
   const [isOpenReg, setIsOpenReg] = useState(false);
   const [selectedReg, setReg] = useState("tashkent");
+  let isLogin = useSelector((state) => state.authModal.isLoggedIn);
+
   const [selectedLang, setLang] = useState(
     JSON.parse(localStorage.getItem("lang")) || langs[0]
   );
@@ -189,10 +191,18 @@ const Navbar = () => {
                   </ul>
                 </div>
               </div>
-
-              <div className={login} onClick={() => dispatch(openAuthModal())}>
-                <button>Login</button>
-              </div>
+              {isLogin ? (
+                <Link to="/user/profile" className={nav.user}>
+                  <SlUserFollowing />
+                </Link>
+              ) : (
+                <div
+                  className={login}
+                  onClick={() => dispatch(openAuthModal())}
+                >
+                  <button>Login</button>
+                </div>
+              )}
             </div>
             <div className={start_order}>
               <button>Start order</button>

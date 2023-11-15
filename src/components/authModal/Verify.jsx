@@ -2,14 +2,19 @@ import React, { useEffect, useRef, useState } from "react";
 import ath from "./auth.module.scss";
 import ver from "./verify.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { closeVerifyModal } from "../../redux/authSlice";
+import { closeVerifyModal, login } from "../../redux/authSlice";
 import { AiOutlineClose } from "react-icons/ai";
+import { useVerifyUserMutation } from "../../redux/authAPI";
+import toast, { Toaster } from "react-hot-toast";
 const Verify = () => {
   const [code, setCode] = useState();
   const [disable, setDisable] = useState(true);
   let isOpen = useSelector((state) => state.authModal.isOpenVerify);
   let dispatch = useDispatch();
   const inputRefs = useRef();
+
+  const [verifyUser, { isError, isSuccess, isLoading }] =
+    useVerifyUserMutation();
 
   let submitBtn = /^[0-9]{4}$/;
   const handleChange = (e) => {
@@ -23,9 +28,23 @@ const Verify = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-   
+    let getPhoneFromStorage = JSON.parse(localStorage.getItem("phone"));
+
+    let postData = await verifyUser({
+      phone: getPhoneFromStorage,
+      code: code,
+    });
+    if (postData.error) {
+      let error = postData.error.data.non_field_errors[0];
+      toast.error(error);
+    } else {
+      toast.success("Successfully login");
+      localStorage.setItem("token", JSON.stringify(postData.data.access));
+      dispatch(closeVerifyModal());
+      dispatch(login());
+    }
   };
 
   useEffect(() => {
@@ -76,6 +95,7 @@ const Verify = () => {
             <button disabled={disable}>login</button>
           </form>
         </div>
+        <Toaster position="top-center" reverseOrder={false} />
       </div>
     </div>
   );

@@ -79,10 +79,10 @@ const AuthModal = () => {
       name: name,
       phone: transformedNumber,
     });
-    if (isError) {
-      toast.error("try again...");
-    }
-    if (isSuccess) {
+
+    console.log(responseData);
+
+    if (responseData.data.code) {
       toast.success("Successfully login");
       setTimeout(() => {
         dispatch(closeAuthModal());

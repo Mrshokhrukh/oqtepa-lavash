@@ -5,6 +5,7 @@ import { BiCategoryAlt } from "react-icons/bi";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
+  changeCateg,
   getCategoriesAsync,
   getProductsAsync,
   getSinglePrAsync,
@@ -15,11 +16,10 @@ import Products from "../../components/products/Products";
 const Home = () => {
   let dispatch = useDispatch();
   let getData = useSelector((state) => state.products);
-  const [products, setProducts] = useState(
-    JSON.parse(localStorage.getItem("product"))
-  );
+  let getProduct = useSelector((state) => state.products.choosenProduct);
 
   const [category, setCateg] = useState("Lavashlar");
+
   useEffect(() => {
     dispatch(getProductsAsync());
     dispatch(getCategoriesAsync());
@@ -27,11 +27,8 @@ const Home = () => {
   }, []);
 
   function changeCategory(data) {
-    const newProducts = getData.products.filter(
-      (item) => item.category_id == data.id
-    );
     setCateg(data.name);
-    setProducts(newProducts);
+    dispatch(changeCateg(data.id));
   }
 
   if (getData.isLoading) {
@@ -69,7 +66,7 @@ const Home = () => {
         <div className={menu.manu_products}>
           <h1 className={menu.product_title}>{category}</h1>
           <div className={menu.menu_products_right}>
-            {products.map((product) => {
+            {getProduct.map((product) => {
               return <Products key={product.id} product={product} />;
             })}
           </div>

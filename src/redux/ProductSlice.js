@@ -5,6 +5,7 @@ const initialState = {
   categories: [],
   error: null,
   isLoading: true,
+  choosenProduct: [],
 };
 
 export const getProductsAsync = createAsyncThunk(
@@ -42,6 +43,12 @@ const productSlice = createSlice({
     getProducts: (state) => {
       return state;
     },
+    changeCateg: (state, action) => {
+      const newProducts = state.products.filter(
+        (item) => item.category_id == action.payload
+      );
+      state.choosenProduct = newProducts;
+    },
 
     // getCategories: (state, action) => {
     //   let a = action.payload.Allproducts.filter(
@@ -71,12 +78,16 @@ const productSlice = createSlice({
     },
 
     // ----------------GET SINGLE-------------------------------------
+    [getSinglePrAsync.pending]: (state) => {
+      state.isLoading = true;
+    },
     [getSinglePrAsync.fulfilled]: (state, action) => {
-      localStorage.setItem("product", JSON.stringify(action.payload));
+      state.isLoading = false;
+      state.choosenProduct = action.payload;
     },
   },
 });
 
-export const { getProducts } = productSlice.actions;
+export const { getProducts, changeCateg } = productSlice.actions;
 
 export default productSlice.reducer;

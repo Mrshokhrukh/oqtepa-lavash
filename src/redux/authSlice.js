@@ -1,8 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+const initialState = {
+  isOpenLogin: false,
+  isOpenVerify: false,
+  isLoggedIn: false,
+};
 const authSlice = createSlice({
   name: "authModal",
-  initialState: { isOpenLogin: false, isOpenVerify: true },
+  initialState,
   reducers: {
     openAuthModal: (state) => {
       state.isOpenLogin = true;
@@ -17,6 +21,12 @@ const authSlice = createSlice({
     closeVerifyModal: (state) => {
       state.isOpenVerify = false;
     },
+    login: (state) => {
+      state.isLoggedIn = true;
+    },
+    logout: (state) => {
+      state.isLoggedIn = false;
+    },
   },
 });
 
@@ -25,6 +35,8 @@ export const {
   closeAuthModal,
   openVerifyModal,
   closeVerifyModal,
+  login,
+  logout,
 } = authSlice.actions;
 
 export default authSlice.reducer;
