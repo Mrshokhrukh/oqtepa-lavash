@@ -83,7 +83,6 @@ const AuthModal = () => {
     console.log(responseData);
 
     if (responseData.data.code) {
-      toast.success("Successfully login");
       setTimeout(() => {
         dispatch(closeAuthModal());
         dispatch(openVerifyModal());

@@ -3,6 +3,8 @@ const initialState = {
   isOpenLogin: false,
   isOpenVerify: false,
   isLoggedIn: false,
+  user: null,
+  accessToken: null,
 };
 const authSlice = createSlice({
   name: "authModal",
@@ -21,11 +23,19 @@ const authSlice = createSlice({
     closeVerifyModal: (state) => {
       state.isOpenVerify = false;
     },
+    setUser: (state, action) => {
+      state.user = action.payload;
+    },
     login: (state) => {
       state.isLoggedIn = true;
     },
     logout: (state) => {
       state.isLoggedIn = false;
+      localStorage.removeItem("token");
+    },
+    setAccessToken: (state, action) => {
+      state.accessToken = action.payload;
+      console.log(state.accessToken);
     },
   },
 });
@@ -37,6 +47,8 @@ export const {
   closeVerifyModal,
   login,
   logout,
+  setAccessToken,
+  setUser,
 } = authSlice.actions;
 
 export default authSlice.reducer;

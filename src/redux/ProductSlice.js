@@ -13,7 +13,6 @@ export const getProductsAsync = createAsyncThunk(
   async () => {
     let getData = await fetch(`${baseUrl}product/`);
     let resp = await getData.json();
-
     return resp;
   }
 );
@@ -31,7 +30,6 @@ export const getCategoriesAsync = createAsyncThunk(
   async () => {
     let getData = await fetch(`${baseUrl}product/categories/`);
     let resp = await getData.json();
-
     return resp;
   }
 );
@@ -56,35 +54,35 @@ const productSlice = createSlice({
     //   );
     // },
   },
-  extraReducers: {
-    [getProductsAsync.pending]: (state) => {
+  extraReducers: (builder) => {
+    builder.addCase(getProductsAsync.pending, (state) => {
       state.isLoading = true;
-    },
-    [getProductsAsync.fulfilled]: (state, action) => {
+    });
+    builder.addCase(getProductsAsync.fulfilled, (state, action) => {
       state.isLoading = false;
       state.products = action.payload;
-    },
-    [getProductsAsync.rejected]: (state) => {
+    });
+    builder.addCase(getProductsAsync.rejected, (state) => {
       state.isLoading = false;
       state.error = "error has been accured";
-    },
+    });
 
     // ----------------CATEGORIES-----------------
-    [getCategoriesAsync.pending]: (state) => {
+    builder.addCase(getCategoriesAsync.pending, (state) => {
       state.isLoading = true;
-    },
-    [getCategoriesAsync.fulfilled]: (state, action) => {
+    });
+    builder.addCase(getCategoriesAsync.fulfilled, (state, action) => {
       state.categories = action.payload;
-    },
+    });
 
     // ----------------GET SINGLE-------------------------------------
-    [getSinglePrAsync.pending]: (state) => {
+    builder.addCase(getSinglePrAsync.pending, (state) => {
       state.isLoading = true;
-    },
-    [getSinglePrAsync.fulfilled]: (state, action) => {
+    });
+    builder.addCase(getSinglePrAsync.fulfilled, (state, action) => {
       state.isLoading = false;
       state.choosenProduct = action.payload;
-    },
+    });
   },
 });
 

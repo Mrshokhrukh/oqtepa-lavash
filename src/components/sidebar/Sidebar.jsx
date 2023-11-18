@@ -52,7 +52,7 @@ const Sidebar = () => {
             <FaShoppingCart />
           </span>
           <Link
-            to="/"
+            to="/user/cart"
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >

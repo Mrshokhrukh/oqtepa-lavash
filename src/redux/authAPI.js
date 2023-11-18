@@ -6,6 +6,7 @@ const authApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${baseUrl}`,
   }),
+
   endpoints: (builder) => ({
     loginUser: builder.mutation({
       query: (userData) => {
@@ -25,46 +26,9 @@ const authApi = createApi({
         };
       },
     }),
-    addToCart: builder.mutation({
-      query: ({ id, token }) => ({
-        url: `product/${id}/basket/`,
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }),
-    }),
-    getCartProducts: builder.mutation({
-      query: (token) => ({
-        url: `product/basket/`,
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }),
-    }),
-    // increaseProductQuantity: builder.mutation({
-    //   query: (productId) => ({
-    //     url: `/cart/increase-quantity/${productId}`, // Replace with your actual endpoint
-    //     method: "PATCH", // Assuming you use PATCH to increase quantity
-    //   }),
-    // }),
-    decreaseProductQuantity: builder.mutation({
-      query: (productId) => ({
-        url: `product/${productId}/delete-basket/`, // Replace with your actual endpoint
-        method: "DELETE", // Assuming you use PATCH to decrease quantity
-      }),
-    }),
   }),
 });
 
-export const {
-  useAddToCartMutation,
-  //   useIncreaseProductQuantityMutation,
-  useDecreaseProductQuantityMutation,
-  useLoginUserMutation,
-  useVerifyUserMutation,
-  useGetCartProductsMutation,
-} = authApi;
+export const { useLoginUserMutation, useVerifyUserMutation } = authApi;
 
 export default authApi;

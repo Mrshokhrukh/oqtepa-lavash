@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ath from "./auth.module.scss";
 import ver from "./verify.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { closeVerifyModal, login } from "../../redux/authSlice";
+import { closeVerifyModal, login, setAccessToken } from "../../redux/authSlice";
 import { AiOutlineClose } from "react-icons/ai";
 import { useVerifyUserMutation } from "../../redux/authAPI";
 import toast, { Toaster } from "react-hot-toast";
@@ -42,8 +42,10 @@ const Verify = () => {
     } else {
       toast.success("Successfully login");
       localStorage.setItem("token", JSON.stringify(postData.data.access));
+      dispatch(setAccessToken(`${postData.data.access}`));
       dispatch(closeVerifyModal());
-      dispatch(login());
+      window.location.reload();
+      setCode("");
     }
   };
 

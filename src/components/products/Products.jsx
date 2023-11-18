@@ -1,22 +1,20 @@
 import React, { useEffect } from "react";
 import menu from "../../pages/Home/home.module.scss";
 import { BsHeart } from "react-icons/bs";
-import { useAddToCartMutation } from "../../redux/authAPI";
+import { useAddToCartMutation } from "../../redux/cartApi";
+
 
 const Products = ({ product }) => {
   const [addToCart, { isLoading }] = useAddToCartMutation();
 
   const handleClick = async (id) => {
     let token = JSON.parse(localStorage.getItem("token"));
-    if (token) {
-      try {
-        let addProduct = await addToCart({ id, token });
-        console.log(addProduct);
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      console.log("login first");
+
+    try {
+      let addProduct = await addToCart({ id, token });
+      console.log(addProduct);
+    } catch (err) {
+      console.log(err);
     }
   };
 
