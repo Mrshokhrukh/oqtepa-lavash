@@ -64,7 +64,7 @@ const Sidebar = () => {
             <MdOutlineFavorite />
           </span>
           <Link
-            to="/"
+            to="/user/favorites"
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >

@@ -9,15 +9,15 @@ import cartApi from "./redux/cartApi";
 
 export const store = configureStore({
   reducer: {
+    cartItems: cartApi,
     sidebar: sidebarSlice,
     modal: modalSlice,
     products: ProductSlice,
     authModal: authSlice,
     [authApi.reducerPath]: authApi.reducer,
-    [cartApi.reducerPath]: authApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, cartApi.middleware),
+    getDefaultMiddleware().concat(authApi.middleware),
 });
 
 setupListeners(store.dispatch);

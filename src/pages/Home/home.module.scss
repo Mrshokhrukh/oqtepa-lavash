@@ -262,7 +262,6 @@
     }
 }
 
-// .__r8iz3_98 ._menu_products_right_r8iz3_105
 @media(max-width:992px) {
     .manu_products .menu_products_right {
         padding: 10px;
@@ -292,7 +291,7 @@
 
         .menu_products_right {
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+            gap: 13px;
             padding: 15px 10px;
 
             .card {
@@ -329,7 +328,7 @@
     }
 }
 
-@media(max-width:380px) {
+@media(max-width:410px) {
     .manu_products {
         .menu_products_right {
             padding: 10px;

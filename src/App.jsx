@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import app from "./style/main.module.scss";
-import './style/universal.scss'
+import "./style/universal.scss";
 import Layout from "./routes/Layout";
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
@@ -26,7 +26,6 @@ const App = () => {
     } else {
       dispatch(logout());
     }
-    
   }, []);
   return (
     <div className={app.container}>

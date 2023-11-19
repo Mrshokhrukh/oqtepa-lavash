@@ -6,6 +6,7 @@ const initialState = {
   error: null,
   isLoading: true,
   choosenProduct: [],
+  likedProducts: [],
 };
 
 export const getProductsAsync = createAsyncThunk(
@@ -31,6 +32,43 @@ export const getCategoriesAsync = createAsyncThunk(
     let getData = await fetch(`${baseUrl}product/categories/`);
     let resp = await getData.json();
     return resp;
+  }
+);
+export const getLikedProduct = createAsyncThunk(
+  "products/getLikedProduct",
+  async ({ token }) => {
+    let getData = await fetch(`${baseUrl}product/favorites/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    let resp = await getData.json();
+    return resp;
+  }
+);
+export const addLikeProduct = createAsyncThunk(
+  "products/addLikeProduct",
+  async ({ id, token }) => {
+    let getData = await fetch(`${baseUrl}product/${id}/add-favorite/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    let resp = await getData.json();
+    return id;
+  }
+);
+export const removeLikeFromProduct = createAsyncThunk(
+  "products/removeLikeFromProduct",
+  async ({ id, token }) => {
+    await fetch(`${baseUrl}product/${id}/delete-favorite/`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return id;
   }
 );
 
@@ -82,6 +120,22 @@ const productSlice = createSlice({
     builder.addCase(getSinglePrAsync.fulfilled, (state, action) => {
       state.isLoading = false;
       state.choosenProduct = action.payload;
+    });
+
+    // ----------------LIKE PRODUCT-------------------------------
+    builder.addCase(getLikedProduct.fulfilled, (state, action) => {
+      state.likedProducts = action.payload;
+    });
+    builder.addCase(addLikeProduct.fulfilled, (state, action) => {
+      let findLikedItem = state.products.find(
+        (item) => item.id === action.payload
+      );
+    });
+
+    builder.addCase(removeLikeFromProduct.fulfilled, (state, action) => {
+      state.likedProducts = state.likedProducts.filter(
+        (item) => item.id !== action.payload
+      );
     });
   },
 });
