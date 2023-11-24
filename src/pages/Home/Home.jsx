@@ -16,7 +16,7 @@ import Products from "../../components/products/Products";
 const Home = () => {
   let dispatch = useDispatch();
   let getData = useSelector((state) => state.products);
-  let getProduct = useSelector((state) => state.products.choosenProduct);
+  let getProduct = useSelector((state) => state.products.products);
 
   const [category, setCateg] = useState("Lavashlar");
 
@@ -28,7 +28,7 @@ const Home = () => {
 
   function changeCategory(data) {
     setCateg(data.name);
-    dispatch(changeCateg(data.id));
+    dispatch(getSinglePrAsync(data.id));
   }
 
   if (getData.isLoading) {
@@ -66,9 +66,13 @@ const Home = () => {
         <div className={menu.manu_products}>
           <h1 className={menu.product_title}>{category}</h1>
           <div className={menu.menu_products_right}>
-            {getProduct.map((product) => {
-              return <Products key={product.id} product={product} />;
-            })}
+            {getData.isPrLoading ? (
+              <h1 className={menu.prLoading}>Loading...</h1>
+            ) : (
+              getProduct.map((product) => {
+                return <Products key={product.id} product={product} />;
+              })
+            )}
           </div>
         </div>
       </div>

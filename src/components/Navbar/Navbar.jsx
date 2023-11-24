@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeSidebar, openSidebar } from "../../redux/sidebarSlice";
 import { openAuthModal } from "../../redux/authSlice";
 import { SlUserFollowing } from "react-icons/sl";
+import { regions as regionsData } from "../dropdowns/LangDropDown";
+
 const {
   navbar,
   logo,
@@ -34,7 +36,8 @@ const {
 const Navbar = () => {
   const [isOpenLang, setIsOpenLang] = useState(false);
   const [isOpenReg, setIsOpenReg] = useState(false);
-  const [selectedReg, setReg] = useState("tashkent");
+  let Localreg = JSON.parse(localStorage.getItem("region"));
+  const [selectedReg, setReg] = useState(Localreg || regionsData[0]);
   let isLogin = useSelector((state) => state.authModal.isLoggedIn);
 
   const [selectedLang, setLang] = useState(
@@ -42,18 +45,25 @@ const Navbar = () => {
   );
 
   useEffect(() => {
-    const getLang = () => {
-      langs.find((lang) => {
-        if (lang.short === selectedLang.short) {
-          lang.isSelected = true;
-          lang.id = 1;
-        } else {
-          lang.id = 0;
-          lang.isSelected = false;
-        }
-      });
-    };
-    getLang();
+    langs.find((lang) => {
+      if (lang.short === selectedLang.short) {
+        lang.isSelected = true;
+        lang.id = 1;
+      } else {
+        lang.id = 0;
+        lang.isSelected = false;
+      }
+    });
+
+    regionsData.find((reg) => {
+      if (reg.name === selectedReg.name) {
+        reg.isSelected = true;
+        reg.id = 1;
+      } else {
+        reg.id = 0;
+        reg.isSelected = false;
+      }
+    });
   }, []);
 
   let navigate = useNavigate();
@@ -82,6 +92,22 @@ const Navbar = () => {
       }
     });
   };
+
+  const changeRegion = (name) => {
+    regionsData?.find((reg) => {
+      if (reg.name === name) {
+        reg.isSelected = true;
+        reg.id = 1;
+        localStorage.setItem("region", JSON.stringify(reg));
+        let getReg = JSON.parse(localStorage.getItem("region"));
+        setReg(getReg);
+      } else {
+        reg.id = 0;
+        reg.isSelected = false;
+      }
+    });
+  };
+  
   let isOpenSidebar = useSelector((state) => state.sidebar.isOpen);
 
   return (
@@ -125,7 +151,7 @@ const Navbar = () => {
                 </div>
                 <div className={nav.region_links}>
                   <span className={regions_title}>regions</span>
-                  <span className={regions_location}>{selectedReg}</span>
+                  <span className={regions_location}>{selectedReg.name}</span>
                 </div>
 
                 <div
@@ -136,13 +162,34 @@ const Navbar = () => {
                   }
                 >
                   <ul className={nav.select_region}>
-                    <li className={nav.selectedOpt}>Toshkent</li>
-                    <li onClick={() => setReg("nukus")}>Nukus</li>
-                    <li onClick={() => setReg("namangan")}>Namangan</li>
-                    <li onClick={() => setReg("qo'qon")}>Qo'qon</li>
-                    <li onClick={() => setReg("samarqand")}>Samarqand</li>
-                    <li onClick={() => setReg("andijon")}>Andijon</li>
-                    <li onClick={() => setReg("farg'ona")}>Farg'ona</li>
+                    {regionsData
+                      .sort((a, b) => b.id - a.id)
+                      .map((opt, i) => {
+                        return (
+                          <div key={i}>
+                            <li
+                              className={opt.isSelected ? nav.selectedOpt : ""}
+                              onClick={() => changeRegion(opt.name)}
+                            >
+                              {opt.name}
+                            </li>
+                          </div>
+                        );
+                      })}
+
+                    {/* <li
+                      className={nav.selectedOpt}
+                      onClick={() => changeRegion("tashkent")}
+                    >
+                      Toshkent
+                    </li>
+                    <li onClick={() => changeRegion("nukus")}>Nukus</li>
+                    <li onClick={() => changeRegion("namangan")}>Namangan</li>
+                    <li onClick={() => changeRegion("kokand")}>Qo'qon</li>
+                    <li onClick={() => changeRegion("samarqand")}>Samarqand</li>
+                    <li onClick={() => changeRegion("andijon")}>Andijon</li>
+                    <li onClick={() => changeRegion("fergana")}>Farg'ona</li>
+                    <li onClick={() => changeRegion("gazalkent")}>Farg'ona</li> */}
                   </ul>
                 </div>
               </div>

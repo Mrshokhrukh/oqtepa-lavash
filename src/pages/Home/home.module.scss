@@ -120,6 +120,7 @@
     }
 
     .menu_products_right {
+
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 25px;
@@ -202,6 +203,10 @@
                 }
             }
         }
+    }
+
+    .prLoading {
+        color: gray;
     }
 }
 

@@ -9,14 +9,14 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa6";
 import { IoLogOut } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../redux/authSlice";
+import { openLogoutModal } from "../../redux/authSlice";
 const UserMenuBar = () => {
   let dispatch = useDispatch();
 
   const logOutUser = () => {
-    dispatch(logout());
+    dispatch(openLogoutModal());
   };
-  
+
   return (
     <div className="bar_menu-user_page">
       <div className="bar_title">
@@ -56,12 +56,12 @@ const UserMenuBar = () => {
           </span>
           <p className="nav_title">favorites</p>
         </NavLink>
-        <NavLink to="/" className="bar_nav_link" onClick={logOutUser}>
+        <div className="bar_nav_link" onClick={logOutUser}>
           <span>
             <IoLogOut />
           </span>
           <p className="nav_title">logout</p>
-        </NavLink>
+        </div>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import axios from "axios";
 export const getCartProducts = createAsyncThunk(
   "cartItems/getCartProducts",
   async ({ token }) => {
-    const response = await axios.get(`${baseUrl}product/basket/`, {
+    const response = await axios.get(`${baseUrl}user/basket/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -16,7 +16,7 @@ export const getCartProducts = createAsyncThunk(
 export const addToCart = createAsyncThunk(
   "cartItems/addToCart",
   async ({ id, token }) => {
-    const response = await axios.get(`${baseUrl}product/${id}/basket/`, {
+    const response = await axios.get(`${baseUrl}user/${id}/basket/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -29,15 +29,12 @@ export const addToCart = createAsyncThunk(
 export const decreaseQTY = createAsyncThunk(
   "cartItems/decreaseQTY",
   async ({ id, token }) => {
-    const response = await axios.delete(
-      `${baseUrl}product/${id}/delete-basket/`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    console.log(response);
+    const response = await axios.delete(`${baseUrl}user/${id}/delete-basket/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
     return response.data;
   }
 );
@@ -45,9 +42,13 @@ export const decreaseQTY = createAsyncThunk(
 export const removeFromCart = createAsyncThunk(
   "cartItems/removeFromCart",
   async ({ id, token }) => {
-    let data = await axios.delete(`${baseUrl}product/${id}/remove-basket/`, {
-      Authorization: `Bearer ${token}`,
-    });
+    let removedData = await axios.delete(
+      `${baseUrl}user/${id}/remove-basket/`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+
     return id;
   }
 );
@@ -69,11 +70,11 @@ const cartProductSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getCartProducts.pending, (state) => {
       state.isLoading = true;
-      state.status = "Loading...";
+     
     });
 
     builder.addCase(getCartProducts.fulfilled, (state, action) => {
-      state.status = "succeeded";
+
       state.products = action.payload;
       state.isSuccess = true;
       state.isLoading = false;
@@ -89,21 +90,23 @@ const cartProductSlice = createSlice({
     });
 
     builder.addCase(removeFromCart.fulfilled, (state, action) => {
-      // state.products.filter((item) => {
-      //   console.log(item);
-      // });
+      state.products = state.products.filter((item) => {
+        return item.id !== action.payload;
+      });
     });
 
     builder.addCase(decreaseQTY.fulfilled, (state, action) => {
-      // let existingItem = state.products.find((item) => {
-      //   return item.product.id === action.payload.product.id;
-      // });
-
-      // if (existingItem && existingItem.quantity > 1) {
-      //   existingItem.quantity -= 1;
-      // }
-
-      console.log(action.payload);
+      let existingItem = state.products.find((item) => {
+        return item.id === action.payload.id;
+      });
+      if (existingItem && existingItem.quantity > 1) {
+        existingItem.quantity -= 1;
+      } else {
+        state.products = state.products.filter((item) => {
+          return item.id !== action.payload.id;
+        });
+        
+      }
     });
 
     builder.addCase(

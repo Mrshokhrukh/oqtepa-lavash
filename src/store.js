@@ -6,6 +6,7 @@ import authSlice from "./redux/authSlice";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import authApi from "./redux/authAPI";
 import cartApi from "./redux/cartApi";
+import userSLice from "./redux/userSLice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     modal: modalSlice,
     products: ProductSlice,
     authModal: authSlice,
+    user: userSLice,
     [authApi.reducerPath]: authApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

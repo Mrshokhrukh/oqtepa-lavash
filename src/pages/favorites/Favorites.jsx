@@ -7,6 +7,7 @@ import {
 } from "../../redux/ProductSlice";
 import { BsHeartFill } from "react-icons/bs";
 import { addToCart } from "../../redux/cartApi";
+import BackTo from "../../components/backTo/BackTo";
 const Favorites = () => {
   let token = JSON.parse(localStorage.getItem("token"));
   let dispatch = useDispatch();
@@ -31,6 +32,7 @@ const Favorites = () => {
 
   return (
     <div>
+      <BackTo pageTitle={'sevimlilar'}/>
       <h2 className="user_page_title">sevimlilar</h2>
       <div className={fav.favorites_page}>
         <div className={fav.liked_products_cont}>

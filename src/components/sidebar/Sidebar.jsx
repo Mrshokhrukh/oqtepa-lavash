@@ -28,7 +28,7 @@ const Sidebar = () => {
             <FaUserAlt />
           </span>
           <Link
-            to="/"
+            to="/user/profile"
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >
@@ -76,7 +76,7 @@ const Sidebar = () => {
             <BiSolidTimeFive />
           </span>
           <Link
-            to="/"
+            to="/user/history"
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >
@@ -88,7 +88,7 @@ const Sidebar = () => {
             <HiLocationMarker />
           </span>
           <Link
-            to="/"
+            to="/user/locations"
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >

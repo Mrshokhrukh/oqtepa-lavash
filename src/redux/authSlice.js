@@ -5,6 +5,8 @@ const initialState = {
   isLoggedIn: false,
   user: null,
   accessToken: null,
+  isLogoutModalOpen: false,
+  isAddressModalOpen: true,
 };
 const authSlice = createSlice({
   name: "authModal",
@@ -22,6 +24,18 @@ const authSlice = createSlice({
     },
     closeVerifyModal: (state) => {
       state.isOpenVerify = false;
+    },
+    openLogoutModal: (state) => {
+      state.isLogoutModalOpen = true;
+    },
+    closeLogoutModal: (state) => {
+      state.isLogoutModalOpen = false;
+    },
+    openAddressModal: (state) => {
+      state.isAddressModalOpen = true;
+    },
+    closeAddressModal: (state) => {
+      state.isAddressModalOpen = false;
     },
     setUser: (state, action) => {
       state.user = action.payload;
@@ -49,6 +63,10 @@ export const {
   logout,
   setAccessToken,
   setUser,
+  openLogoutModal,
+  closeLogoutModal,
+  openAddressModal,
+  closeAddressModal,
 } = authSlice.actions;
 
 export default authSlice.reducer;

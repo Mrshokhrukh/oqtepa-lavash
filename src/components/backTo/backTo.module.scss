@@ -1,0 +1,40 @@
+.backto_main_div {
+    width: 100%;
+    position: fixed;
+    z-index: 20;
+    top: 60px;
+    height: auto;
+    border-bottom: 1px solid var(--main);
+    background-color: white;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 15px;
+    text-transform: capitalize;
+    padding-bottom: 5px;
+    display: none;
+
+    .back_icon {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 0;
+        font-size: 22px;
+        border: 2px solid rgb(0, 0, 0);
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    p {
+        font-weight: bold;
+        font-size: 14px;
+    }
+}
+
+@media (max-width:768px) {
+    .backto_main_div {
+        display: flex;
+    }
+}

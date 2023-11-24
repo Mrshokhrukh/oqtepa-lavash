@@ -312,7 +312,7 @@
                     .actions {
                         height: 35px;
                         width: 100%;
-                        font-size: 15px;
+                        font-size: 18px;
                     }
 
                     .delete_btn {
@@ -326,9 +326,43 @@
 }
 
 @media(max-width:768px) {
+    .order_box {
+        box-shadow: none;
+        height: auto;
+        gap: 0px !important;
+
+        .orderbox_title,
+        .address,
+        .devider {
+            display: none !important;
+        }
+
+        .data:nth-child(1) {
+            display: none !important;
+        }
+
+        .data span,
+        p {
+            color: black;
+            font-weight: 500;
+        }
+
+        .white_btn {
+            display: none;
+        }
+
+    }
+
     .cart_page {
-        height: calc(100% - 30px);
+        height: 100%;
         padding: 10px;
+        box-shadow: none;
+        margin-top: 25px;
+       
+    }
+
+    .products_div .product_card {
+        box-shadow: var(--shadow);
     }
 }
 

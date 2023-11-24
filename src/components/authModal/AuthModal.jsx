@@ -83,10 +83,8 @@ const AuthModal = () => {
     console.log(responseData);
 
     if (responseData.data.code) {
-      setTimeout(() => {
-        dispatch(closeAuthModal());
-        dispatch(openVerifyModal());
-      }, 1000);
+      dispatch(closeAuthModal());
+      dispatch(openVerifyModal());
     }
 
     setName("");

@@ -4,9 +4,11 @@ import { BsHeart } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/cartApi";
 import { addLikeProduct } from "../../redux/ProductSlice";
+import { BsHeartFill } from "react-icons/bs";
 const Products = ({ product }) => {
   let token = JSON.parse(localStorage.getItem("token"));
   let dispatch = useDispatch();
+
   const handleClick = async (id) => {
     let token = JSON.parse(localStorage.getItem("token"));
 
@@ -16,17 +18,13 @@ const Products = ({ product }) => {
       console.log(err);
     }
   };
-
   const handleLike = (id) => {
     dispatch(addLikeProduct({ id, token }));
   };
-
   return (
     <div className={menu.card}>
       <div className={menu.like} onClick={() => handleLike(product.id)}>
-        <span>
-          <BsHeart />
-        </span>
+        <span>{product.is_like ? <BsHeartFill /> : <BsHeart />}</span>
       </div>
       <img src={product.image} alt="404" />
       <div className={menu.card_info}>
