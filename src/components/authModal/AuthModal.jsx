@@ -10,6 +10,7 @@ const AuthModal = () => {
   const [loginUser, { isError, isSuccess, isLoading }] = useLoginUserMutation();
   const [name, setName] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
+
   let nameCheck = useRef(null);
   let phoneCheck = useRef(null);
   let isOpen = useSelector((state) => state.authModal.isOpenLogin);
@@ -85,11 +86,14 @@ const AuthModal = () => {
     if (responseData.data.code) {
       dispatch(closeAuthModal());
       dispatch(openVerifyModal());
+      toast.success("tasdiqlash kodi yuborildi");
     }
 
     setName("");
     setPhone("");
   };
+
+ 
 
   return (
     <div

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Nav_catalogs from "../../components/nav_catalogs/Nav_catalogs";
 import menu from "./home.module.scss";
 import { BiCategoryAlt } from "react-icons/bi";
-
+import toast, { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeCateg,
@@ -13,11 +13,12 @@ import {
 import Loading from "../../components/loading/Loading";
 import Categories from "../../components/categories/Categories";
 import Products from "../../components/products/Products";
+
 const Home = () => {
   let dispatch = useDispatch();
   let getData = useSelector((state) => state.products);
   let getProduct = useSelector((state) => state.products.products);
-
+  let token = JSON.parse(localStorage.getItem("token"));
   const [category, setCateg] = useState("Lavashlar");
 
   useEffect(() => {
@@ -28,6 +29,7 @@ const Home = () => {
 
   function changeCategory(data) {
     setCateg(data.name);
+
     dispatch(getSinglePrAsync(data.id));
   }
 

@@ -6,7 +6,7 @@ const initialState = {
   user: null,
   accessToken: null,
   isLogoutModalOpen: false,
-  isAddressModalOpen: true,
+  isAddressModalOpen: false,
 };
 const authSlice = createSlice({
   name: "authModal",

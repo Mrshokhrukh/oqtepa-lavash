@@ -12,7 +12,7 @@ const Verify = () => {
   let isOpen = useSelector((state) => state.authModal.isOpenVerify);
   let dispatch = useDispatch();
   const inputRefs = useRef();
-
+  const [timer, setTimer] = useState(60);
   const [verifyUser, { isError, isSuccess, isLoading }] =
     useVerifyUserMutation();
 
@@ -36,6 +36,7 @@ const Verify = () => {
       phone: getPhoneFromStorage,
       code: code,
     });
+
     if (postData.error) {
       let error = postData.error.data.non_field_errors[0];
       toast.error(error);
@@ -53,6 +54,18 @@ const Verify = () => {
     inputRefs.current.focus();
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (timer > 0) {
+        setTimer((prevSeconds) => prevSeconds - 1);
+      } else {
+        clearInterval(interval);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [timer]);
+
   return (
     <div
       className={
@@ -61,6 +74,7 @@ const Verify = () => {
           : `${ath.auth_modal_background}`
       }
     >
+      <Toaster position="top-center" reverseOrder={false} />
       <div className={ath.auth_modal}>
         <div className={ath.modal_header}>
           <h2>Verification</h2>
@@ -92,12 +106,17 @@ const Verify = () => {
                 <div className={ver.code}>•</div>
                 <div className={ver.code}>•</div> */}
               </div>
-              <p className={ver.req_again}>Request code again</p>
+              {timer < 1 ? (
+                <p className={ver.req_again} onClick={() => setTimer(60)}>
+                  Request code again
+                </p>
+              ) : (
+                <p>{timer}s</p>
+              )}
             </div>
             <button disabled={disable}>login</button>
           </form>
         </div>
-        <Toaster position="top-center" reverseOrder={false} />
       </div>
     </div>
   );

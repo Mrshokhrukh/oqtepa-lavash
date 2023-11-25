@@ -7,7 +7,7 @@ import { IoClose } from "react-icons/io5";
 import { langs } from "../dropdowns/LangDropDown";
 import { useDispatch, useSelector } from "react-redux";
 import { closeSidebar, openSidebar } from "../../redux/sidebarSlice";
-import { openAuthModal } from "../../redux/authSlice";
+import { openAddressModal, openAuthModal } from "../../redux/authSlice";
 import { SlUserFollowing } from "react-icons/sl";
 import { regions as regionsData } from "../dropdowns/LangDropDown";
 
@@ -107,7 +107,7 @@ const Navbar = () => {
       }
     });
   };
-  
+
   let isOpenSidebar = useSelector((state) => state.sidebar.isOpen);
 
   return (
@@ -132,7 +132,10 @@ const Navbar = () => {
 
               <NavLink to="/contact">Contacts</NavLink>
 
-              <div className={delivery}>
+              <div
+                className={delivery}
+                onClick={() => dispatch(openAddressModal())}
+              >
                 <div className={nav.delivery_icon}>
                   <HiLocationMarker />
                 </div>

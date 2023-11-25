@@ -5,13 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/cartApi";
 import { addLikeProduct } from "../../redux/ProductSlice";
 import { BsHeartFill } from "react-icons/bs";
+import toast, { Toaster } from "react-hot-toast";
 const Products = ({ product }) => {
   let token = JSON.parse(localStorage.getItem("token"));
   let dispatch = useDispatch();
 
   const handleClick = async (id) => {
-    let token = JSON.parse(localStorage.getItem("token"));
-
+    if (!token) {
+      toast.error("hali login qilmagansiz");
+    }
     try {
       dispatch(addToCart({ id, token }));
     } catch (err) {
@@ -19,10 +21,15 @@ const Products = ({ product }) => {
     }
   };
   const handleLike = (id) => {
-    dispatch(addLikeProduct({ id, token }));
+    if (token) {
+      dispatch(addLikeProduct({ id, token }));
+    } else {
+      toast.error("hali login qilmagansiz");
+    }
   };
   return (
     <div className={menu.card}>
+      <Toaster position="top-center" reverseOrder={false} />
       <div className={menu.like} onClick={() => handleLike(product.id)}>
         <span>{product.is_like ? <BsHeartFill /> : <BsHeart />}</span>
       </div>
