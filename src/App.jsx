@@ -16,9 +16,6 @@ import Cart from "./pages/cart/Cart";
 import History from "./pages/history/History";
 import Locations from "./pages/locations/Locations";
 import Favorites from "./pages/favorites/Favorites";
-import NoMatch from "./pages/noMatch/NoMatch";
-import { AuthProvider } from "./context/Context";
-import ProtectedRoute from "./context/ProtectedRoute";
 
 const App = () => {
   let dispatch = useDispatch();
@@ -36,35 +33,20 @@ const App = () => {
         <div>
           <Layout />
         </div>
-        <AuthProvider>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="branches" element={<Branches />} />
-            <Route path="contact" element={<Contact />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="branches" element={<Branches />} />
+          <Route path="contact" element={<Contact />} />
 
-            <Route path="user" element={<User />}>
-              <ProtectedRoute
-                path="profile"
-                element={<Profile />}
-              ></ProtectedRoute>
-              <ProtectedRoute path="cart" element={<Cart />}></ProtectedRoute>
-              <ProtectedRoute
-                path="history"
-                element={<History />}
-              ></ProtectedRoute>
-              <ProtectedRoute
-                path="locations"
-                element={<Locations />}
-              ></ProtectedRoute>
-              <ProtectedRoute
-                path="favorites"
-                element={<Favorites />}
-              ></ProtectedRoute>
-            </Route>
-            <Route path="*" element={<NoMatch />} />
-          </Routes>
-        </AuthProvider>
+          <Route path="user" element={<User />}>
+            <Route path="profile" element={<Profile />}></Route>
+            <Route path="cart" element={<Cart />}></Route>
+            <Route path="history" element={<History />}></Route>
+            <Route path="locations" element={<Locations />}></Route>
+            <Route path="favorites" element={<Favorites />}></Route>
+          </Route>
+        </Routes>
       </BrowserRouter>
     </div>
   );
