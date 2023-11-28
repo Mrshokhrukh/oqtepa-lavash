@@ -29,7 +29,6 @@ const Home = () => {
 
   function changeCategory(data) {
     setCateg(data.name);
-
     dispatch(getSinglePrAsync(data.id));
   }
 
@@ -59,6 +58,7 @@ const Home = () => {
                     key={cat.id}
                     categories={cat}
                     changeCategory={changeCategory}
+                    category={category}
                   />
                 );
               })}

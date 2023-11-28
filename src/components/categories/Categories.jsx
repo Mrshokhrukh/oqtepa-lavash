@@ -1,8 +1,12 @@
 import menu from "../../pages/Home/home.module.scss";
-const Categories = ({ categories, changeCategory }) => {
+const Categories = ({ categories, changeCategory, category }) => {
   return (
     <div
-      className={`${menu.product}`}
+      className={
+        category === categories.name
+          ? `${menu.product} ${menu.active}`
+          : menu.product
+      }
       onClick={() => changeCategory(categories)}
     >
       <img src={categories.icon} alt="" />
