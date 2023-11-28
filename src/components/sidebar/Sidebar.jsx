@@ -9,16 +9,17 @@ import { HiLocationMarker } from "react-icons/hi";
 import { AiFillCompass } from "react-icons/ai";
 import { RiTeamFill } from "react-icons/ri";
 import { IoCall } from "react-icons/io5";
-
+import { IoLogOut } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { closeSidebar } from "../../redux/sidebarSlice";
 import Selections from "./Selections";
+import { openLogoutModal } from "../../redux/authSlice";
 
 const Sidebar = () => {
   let isOpen = useSelector((state) => state.sidebar.isOpen);
   let dispatch = useDispatch();
-
+  let token = JSON.parse(localStorage.getItem("token"));
   return (
     <div className={isOpen ? `${sid.sidebar} ${sid.open}` : `${sid.sidebar}`}>
       <div className={sid.sidebar_elements}>
@@ -28,7 +29,7 @@ const Sidebar = () => {
             <FaUserAlt />
           </span>
           <Link
-            to="/user/profile"
+            to={token ? `/user/profile` : "/user/login"}
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >
@@ -40,7 +41,7 @@ const Sidebar = () => {
             <MdOutlineMenuBook />
           </span>
           <Link
-            to="/"
+            to={token ? `/` : "/user/login"}
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >
@@ -52,7 +53,7 @@ const Sidebar = () => {
             <FaShoppingCart />
           </span>
           <Link
-            to="/user/cart"
+            to={token ? `/user/cart` : "/user/login"}
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >
@@ -64,7 +65,7 @@ const Sidebar = () => {
             <MdOutlineFavorite />
           </span>
           <Link
-            to="/user/favorites"
+            to={token ? `/user/favorites` : "/user/login"}
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >
@@ -76,7 +77,7 @@ const Sidebar = () => {
             <BiSolidTimeFive />
           </span>
           <Link
-            to="/user/history"
+            to={token ? `/user/history` : "/user/login"}
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >
@@ -88,7 +89,7 @@ const Sidebar = () => {
             <HiLocationMarker />
           </span>
           <Link
-            to="/user/locations"
+            to={token ? `/user/locations` : "/user/login"}
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >
@@ -100,7 +101,7 @@ const Sidebar = () => {
             <AiFillCompass />
           </span>
           <Link
-            to="/branches"
+            to={token ? `/branches` : "/user/login"}
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >
@@ -112,7 +113,7 @@ const Sidebar = () => {
             <RiTeamFill />
           </span>
           <Link
-            to="/about"
+            to={token ? `/about` : "/user/login"}
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >
@@ -124,11 +125,25 @@ const Sidebar = () => {
             <IoCall />
           </span>
           <Link
-            to="/contact"
+            to={token ? `/contact` : "/user/login"}
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >
             contact
+          </Link>
+        </div>
+        <div className={sid.element}>
+          <span className={sid.icon}>
+            <IoLogOut />
+          </span>
+          <Link
+            to={token ? `/contact` : "/user/login"}
+            onClick={() => {
+              dispatch(openLogoutModal());
+            }}
+            className={sid.text}
+          >
+            logout
           </Link>
         </div>
       </div>

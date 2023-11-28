@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ath from "./auth.module.scss";
 import ver from "./verify.module.scss";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { closeVerifyModal, login, setAccessToken } from "../../redux/authSlice";
 import { AiOutlineClose } from "react-icons/ai";
 import { useVerifyUserMutation } from "../../redux/authAPI";
@@ -12,6 +13,7 @@ const Verify = () => {
   let isOpen = useSelector((state) => state.authModal.isOpenVerify);
   let dispatch = useDispatch();
   const inputRefs = useRef();
+  let navigate = useNavigate();
   const [timer, setTimer] = useState(60);
   const [verifyUser, { isError, isSuccess, isLoading }] =
     useVerifyUserMutation();
@@ -47,6 +49,7 @@ const Verify = () => {
       dispatch(closeVerifyModal());
       window.location.reload();
       setCode("");
+      navigate("/");
     }
   };
 

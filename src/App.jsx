@@ -16,6 +16,7 @@ import Cart from "./pages/cart/Cart";
 import History from "./pages/history/History";
 import Locations from "./pages/locations/Locations";
 import Favorites from "./pages/favorites/Favorites";
+import Login from "./pages/Login/Login";
 
 const App = () => {
   let dispatch = useDispatch();
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="contact" element={<Contact />} />
 
           <Route path="user" element={<User />}>
+            <Route path="login" element={<Login />}></Route>
             <Route path="profile" element={<Profile />}></Route>
             <Route path="cart" element={<Cart />}></Route>
             <Route path="history" element={<History />}></Route>
