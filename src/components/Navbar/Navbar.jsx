@@ -36,6 +36,7 @@ const {
 const Navbar = () => {
   const [isOpenLang, setIsOpenLang] = useState(false);
   const [isOpenReg, setIsOpenReg] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   let Localreg = JSON.parse(localStorage.getItem("region"));
   const [selectedReg, setReg] = useState(Localreg || regionsData[0]);
   let isLogin = useSelector((state) => state.authModal.isLoggedIn);
@@ -108,11 +109,20 @@ const Navbar = () => {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  const handleChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
   let isOpenSidebar = useSelector((state) => state.sidebar.isOpen);
 
   return (
     <div>
       <nav className={`${navbar} ${nav.container}`}>
+
         <div className={logo}>
           <img
             src="https://oqtepalavash.uz/assets/images/logo_2.0.svg"
@@ -198,11 +208,16 @@ const Navbar = () => {
               </div>
             </div>
             <div className={bottom_search}>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <p className={search_icon}>
                   <ion-icon name="search-outline"></ion-icon>
                 </p>
-                <input type="text" placeholder="Cheesy tandory lavash..." />
+                <input
+                  type="text"
+                  placeholder="Cheesy tandory lavash..."
+                  value={searchValue || ""}
+                  onChange={handleChange}
+                />
               </form>
             </div>
           </div>
@@ -282,6 +297,7 @@ const Navbar = () => {
             </>
           )}
         </div>
+        
       </nav>
     </div>
   );

@@ -11,12 +11,10 @@
 }
 
 
-
 .modal_container {
     width: 82%;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-
 
     .modal_wrapper {
         box-shadow: var(--shadow);
@@ -214,6 +212,12 @@
 
     }
 
+    @media(max-width:768px) {
+        // .modal_wrapper {
+        //     display: flex;
+        //     flex-direction: column;
+        // }
+    }
 }
 
 .map_modal_background.open {

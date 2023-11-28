@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import { HiLocationMarker } from "react-icons/hi";
-import GoogleWrapper from "./GoogleWrapper";
 
 const MapLocationsModal = () => {
   const [categ, setCateg] = useState(1);
+  const API_KEY = `AIzaSyDSIKGeXhVBPJc9NRX785HkXhA0pxwrFmg`;
   let dispatch = useDispatch();
   let isOpen = useSelector((state) => state.authModal.isAddressModalOpen);
   const handleClick = (num) => {
@@ -88,7 +88,13 @@ const MapLocationsModal = () => {
             </button>
           </div>
           <div className={map.map_modal_right}>
-            <GoogleWrapper />
+            {/* <GoogleWrapper
+              isMarkerShown
+              googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: `400px` }} />}
+              mapElement={<div style={{ height: `100%` }} />}
+            /> */}
           </div>
         </div>
       </div>
