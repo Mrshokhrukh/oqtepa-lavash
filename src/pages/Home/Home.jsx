@@ -13,6 +13,7 @@ import {
 import Loading from "../../components/loading/Loading";
 import Categories from "../../components/categories/Categories";
 import Products from "../../components/products/Products";
+import Footer from "../../components/Footer/Footer";
 
 const Home = () => {
   let dispatch = useDispatch();
@@ -78,6 +79,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

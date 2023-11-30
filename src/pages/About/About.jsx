@@ -1,5 +1,6 @@
 import React from "react";
 import ab from "./about.module.scss";
+import Footer from "../../components/Footer/Footer";
 const About = () => {
   return (
     <div className={ab.page_container}>
@@ -43,6 +44,8 @@ const About = () => {
       </div>
 
       <div className={ab.space_bottom}></div>
+
+      <Footer />
     </div>
   );
 };

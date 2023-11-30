@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import app from "./style/main.module.scss";
 import "./style/universal.scss";
-import Layout from "./routes/Layout";
+import Layout from "./routes/Header";
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
@@ -17,6 +17,7 @@ import History from "./pages/history/History";
 import Locations from "./pages/locations/Locations";
 import Favorites from "./pages/favorites/Favorites";
 import Login from "./pages/Login/Login";
+import Header from "./routes/Header";
 
 const App = () => {
   let dispatch = useDispatch();
@@ -32,7 +33,7 @@ const App = () => {
     <div className={app.container}>
       <BrowserRouter>
         <div>
-          <Layout />
+          <Header />
         </div>
         <Routes>
           <Route path="/" element={<Home />} />

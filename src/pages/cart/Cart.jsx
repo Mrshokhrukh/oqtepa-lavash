@@ -48,7 +48,7 @@ const Cart = () => {
       <BackTo pageTitle={"savatcha"} />
       <h2 className="user_page_title">savatcha</h2>
       <div className={cart.cart_page}>
-        {cartItems.length > 0 ? (
+        {cartItems?.length > 0 ? (
           <div className={`${cart.main_div_cart}`}>
             <div className={cart.products_div}>
               {cartItems?.map((card) => {

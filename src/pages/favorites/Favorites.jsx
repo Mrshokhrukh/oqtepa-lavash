@@ -32,35 +32,39 @@ const Favorites = () => {
 
   return (
     <div>
-      <BackTo pageTitle={'sevimlilar'}/>
+      <BackTo pageTitle={"sevimlilar"} />
       <h2 className="user_page_title">sevimlilar</h2>
       <div className={fav.favorites_page}>
         <div className={fav.liked_products_cont}>
-          {likedProducts?.map((likedItem) => {
-            return (
-              <div className={fav.card} key={likedItem.id}>
-                <div
-                  className={fav.like}
-                  onClick={() => unLikeFunc(likedItem.id)}
-                >
-                  <span>
-                    <BsHeartFill />
-                  </span>
-                </div>
-                <img src={likedItem.image} alt="404" />
-                <div className={fav.card_info}>
-                  <div className={fav.name}>{likedItem.name}</div>
-                  <div className={fav.price}>{likedItem.price}</div>
-                  <button
-                    className={fav.button}
-                    onClick={() => handleClick(likedItem.id)}
+          {likedProducts.length > 0 ? (
+            likedProducts?.map((likedItem) => {
+              return (
+                <div className={fav.card} key={likedItem.id}>
+                  <div
+                    className={fav.like}
+                    onClick={() => unLikeFunc(likedItem.id)}
                   >
-                    Add
-                  </button>
+                    <span>
+                      <BsHeartFill />
+                    </span>
+                  </div>
+                  <img src={likedItem.image} alt="404" />
+                  <div className={fav.card_info}>
+                    <div className={fav.name}>{likedItem.name}</div>
+                    <div className={fav.price}>{likedItem.price}</div>
+                    <button
+                      className={fav.button}
+                      onClick={() => handleClick(likedItem.id)}
+                    >
+                      Add
+                    </button>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          ) : (
+            <h2>emppty</h2>
+          )}
         </div>
       </div>
     </div>

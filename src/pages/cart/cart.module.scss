@@ -40,6 +40,16 @@
         width: 360px;
     }
 }
+@media(max-width:410px){
+    .empty_cart{
+        .emty_ttitle{
+            font-size: 18px;
+        }
+        img{
+            width: 290px;
+        }
+    }
+}
 
 .main_div_cart {
     display: grid;

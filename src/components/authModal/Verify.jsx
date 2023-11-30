@@ -47,7 +47,7 @@ const Verify = () => {
       localStorage.setItem("token", JSON.stringify(postData.data.access));
       dispatch(setAccessToken(`${postData.data.access}`));
       dispatch(closeVerifyModal());
-      navigate("/user/profile");
+      navigate("/");
       window.location.reload();
       setCode("");
     }
@@ -104,10 +104,6 @@ const Verify = () => {
                   onChange={handleChange}
                   ref={inputRefs}
                 />
-
-                {/* <div className={ver.code}></div>
-                <div className={ver.code}>•</div>
-                <div className={ver.code}>•</div> */}
               </div>
               {timer < 1 ? (
                 <p className={ver.req_again} onClick={() => setTimer(60)}>

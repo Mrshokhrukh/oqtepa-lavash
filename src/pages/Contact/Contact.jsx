@@ -1,5 +1,6 @@
 import React from "react";
 import con from "./contact.module.scss";
+import Footer from "../../components/Footer/Footer";
 const Contact = () => {
   return (
     <div className={con.page_container}>
@@ -36,6 +37,7 @@ const Contact = () => {
           </a>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

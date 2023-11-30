@@ -120,12 +120,11 @@
     }
 
     .menu_products_right {
-
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 25px;
-        padding: 20px;
-        height: 810px;
+        gap: 10px;
+        padding: 15px;
+        height: 790px;
         overflow: auto;
 
         &::-webkit-scrollbar {
@@ -208,6 +207,11 @@
     .prLoading {
         color: gray;
     }
+}
+@media((max-height:940px ) and (max-width:768px)){
+  .manu_products .menu_products_right{
+    margin-bottom: 60px;
+  }  
 }
 
 @media(max-width:1280px) {

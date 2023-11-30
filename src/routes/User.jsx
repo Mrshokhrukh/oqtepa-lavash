@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import UserMenuBar from "../components/userMenuBar/UserMenuBar";
 import userStyle from "../style/user.module.scss";
+import Footer from "../components/Footer/Footer";
 const User = () => {
   return (
     <div className={userStyle.page_container}>
@@ -12,6 +13,7 @@ const User = () => {
           <Outlet />
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

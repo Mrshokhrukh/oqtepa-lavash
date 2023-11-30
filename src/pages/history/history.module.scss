@@ -56,6 +56,8 @@
     }
 }
 
+
+
 @media(max-width:768px) {
     .history_page {
         box-shadow: none;
@@ -70,6 +72,18 @@
 
         img {
             width: 337px;
+        }
+    }
+}
+
+@media(max-width:512px) {
+    .empty_history {
+        .empty_history_title {
+            font-size: 14px;
+        }
+
+        img {
+            width: 290px;
         }
     }
 }

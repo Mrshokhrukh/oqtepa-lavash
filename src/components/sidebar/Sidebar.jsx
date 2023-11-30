@@ -41,7 +41,7 @@ const Sidebar = () => {
             <MdOutlineMenuBook />
           </span>
           <Link
-            to={token ? `/` : "/user/login"}
+            to={"/"}
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >
@@ -101,7 +101,7 @@ const Sidebar = () => {
             <AiFillCompass />
           </span>
           <Link
-            to={token ? `/branches` : "/user/login"}
+            to={`/branches`}
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >
@@ -113,7 +113,7 @@ const Sidebar = () => {
             <RiTeamFill />
           </span>
           <Link
-            to={token ? `/about` : "/user/login"}
+            to={`/about`}
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >
@@ -125,7 +125,7 @@ const Sidebar = () => {
             <IoCall />
           </span>
           <Link
-            to={token ? `/contact` : "/user/login"}
+            to={`/contact`}
             onClick={() => dispatch(closeSidebar())}
             className={sid.text}
           >
@@ -137,7 +137,7 @@ const Sidebar = () => {
             <IoLogOut />
           </span>
           <Link
-            to={token ? `/contact` : "/user/login"}
+            to={"/"}
             onClick={() => {
               dispatch(openLogoutModal());
             }}
