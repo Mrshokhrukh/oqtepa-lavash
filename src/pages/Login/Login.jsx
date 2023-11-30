@@ -4,9 +4,9 @@ import { openAuthModal } from "../../redux/authSlice";
 import login from "./login.module.scss";
 const Login = () => {
   let dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(openAuthModal());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(openAuthModal());
+  // }, []);
 
   const openModal = () => {
     dispatch(openAuthModal());

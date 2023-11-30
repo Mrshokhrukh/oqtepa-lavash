@@ -47,9 +47,9 @@ const Verify = () => {
       localStorage.setItem("token", JSON.stringify(postData.data.access));
       dispatch(setAccessToken(`${postData.data.access}`));
       dispatch(closeVerifyModal());
+      navigate("/user/profile");
       window.location.reload();
       setCode("");
-      navigate("/");
     }
   };
 

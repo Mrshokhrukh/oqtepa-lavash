@@ -122,7 +122,6 @@ const Navbar = () => {
   return (
     <div>
       <nav className={`${navbar} ${nav.container}`}>
-
         <div className={logo}>
           <img
             src="https://oqtepalavash.uz/assets/images/logo_2.0.svg"
@@ -297,7 +296,6 @@ const Navbar = () => {
             </>
           )}
         </div>
-        
       </nav>
     </div>
   );

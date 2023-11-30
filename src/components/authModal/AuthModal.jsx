@@ -81,19 +81,18 @@ const AuthModal = () => {
       phone: transformedNumber,
     });
 
-    console.log(responseData);
-
     if (responseData.data.code) {
       dispatch(closeAuthModal());
       dispatch(openVerifyModal());
       toast.success("tasdiqlash kodi yuborildi");
+      toast(responseData.data.code, {
+        icon: "💬",
+      });
     }
 
     setName("");
     setPhone("");
   };
-
- 
 
   return (
     <div
